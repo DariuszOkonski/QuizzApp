@@ -2,11 +2,13 @@
 {
     internal class Quiz
     {
-        private Question[] questions;
+        private Question[] _questions;
+        private int _score;
 
         public Quiz(Question[] questions)
         {
-            this.questions = questions;
+            this._questions = questions;
+            this._score = 0;
         }
 
         public void StartQuiz()
@@ -14,7 +16,7 @@
             Console.WriteLine("Welcome to the Quiz!");
             int questionNumber = 1;
 
-            foreach (var question in questions)
+            foreach (var question in _questions)
             {
                 Console.WriteLine($"Question {questionNumber++}");
                 DisplayQuestion(question);
@@ -23,11 +25,44 @@
                 if (question.IsCorrectAnswer(userChoice))
                 {
                     Console.WriteLine("Correct!");
+                    _score++;
                 }
                 else
                 {
                     Console.WriteLine($"Wrong! The Correct answer was: {question.Answers[question.CorrectAnswerIndex]}");
                 }
+            }
+
+            DisplayResults();
+        }
+
+        private void DisplayResults()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine("|                 Results                |");
+            Console.WriteLine("==========================================");
+            Console.WriteLine();
+            Console.ResetColor();
+            Console.WriteLine($"Quiz finished. Your score is: {_score} out of {_questions.Length}");
+
+            double percentage = (double)_score / _questions.Length;
+
+            if (percentage >= 0.8)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Excelent Work!");
+            }
+            else if (percentage >= 0.5)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Good effort!");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Keep practicing!");
             }
         }
 

@@ -13,6 +13,11 @@
             CorrectAnswerIndex = correctAnswerIndex;
         }
 
+        public string GetCorrectAnswer()
+        {
+            return Answers[CorrectAnswerIndex];
+        }
+
         public bool IsCorrectAnswer(int choice)
         {
             return CorrectAnswerIndex == choice;

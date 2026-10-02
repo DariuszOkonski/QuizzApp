@@ -9,7 +9,29 @@
             this.questions = questions;
         }
 
-        public void DisplayQuestion(Question question)
+        public void StartQuiz()
+        {
+            Console.WriteLine("Welcome to the Quiz!");
+            int questionNumber = 1;
+
+            foreach (var question in questions)
+            {
+                Console.WriteLine($"Question {questionNumber++}");
+                DisplayQuestion(question);
+                int userChoice = GetUserChoice();
+
+                if (question.IsCorrectAnswer(userChoice))
+                {
+                    Console.WriteLine("Correct!");
+                }
+                else
+                {
+                    Console.WriteLine($"Wrong! The Correct answer was: {question.Answers[question.CorrectAnswerIndex]}");
+                }
+            }
+        }
+
+        private void DisplayQuestion(Question question)
         {
             DisplayHeader();
             Console.WriteLine(question.QuestionText);
@@ -22,15 +44,6 @@
                 Console.ResetColor();
 
                 Console.WriteLine($". {question.Answers[i]}");
-            }
-
-            if (GetUserChoice() == question.CorrectAnswerIndex)
-            {
-                Console.WriteLine("Correct");
-            }
-            else
-            {
-                Console.WriteLine("Incorrect");
             }
         }
 

@@ -12,15 +12,20 @@
                     1
                 ),
                 new Question(
-                    "What is the name of former president Regan?",
-                    new string[] { "John", "Mark", "Ronald", "Michael"},
-                    2
+                    "What is 2 + 2?",
+                    new string[] { "3", "4", "5", "6"},
+                    1
                 ),
+                //new Question(
+                //    "What is the name of former president Regan?",
+                //    new string[] { "John", "Mark", "Ronald", "Michael"},
+                //    2
+                //),
 
             };
 
             Quiz myQuiz = new Quiz(questions);
-            myQuiz.DisplayQuestion(questions[0]);
+            myQuiz.StartQuiz();
 
 
             Console.ReadKey();
